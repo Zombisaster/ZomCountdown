@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #timer {
+            font-family: Arial, sans-serif;
+            font-size: 62px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="timer">00:00</div>
+    <script>
+        // Set countdown time in minutes and seconds
+        let countdownMinutes = 5;
+        let countdownSeconds = 0;
+        
+        let totalTime = (countdownMinutes * 60) + countdownSeconds;
+        let timerElement = document.getElementById('timer');
+        
+        function updateTimerDisplay(time) {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        function startCountdown() {
+            let countdown = setInterval(() => {
+                if (totalTime > 0) {
+                    totalTime--;
+                    updateTimerDisplay(totalTime);
+                } else {
+                    clearInterval(countdown);
+                }
+            }, 1000);
+        }
+        
+        updateTimerDisplay(totalTime);
+        startCountdown();
+    </script>
+</body>
+</html>
